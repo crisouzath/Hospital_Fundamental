@@ -13,7 +13,7 @@ Um pequeno hospital local busca desenvolver um novo sistema que atenda melhor à
 
 > Deseja-se ainda informatizar a receita do médico, de maneira que, no encerramento da consulta, ele possa registrar os medicamentos receitados, a quantidade e as instruções de uso.
 
-<img src='https://user-images.githubusercontent.com/111239606/199724427-f71c7227-8870-4319-aaf3-148c07ac867f.png'><br><br>
+<img src='https://user-images.githubusercontent.com/111239606/199850096-4fd3db56-0c63-4997-97d6-7f6d48ebe39e.png'><br><br>
 
 ### Parte 2
 Após a primeira versão do projeto de banco de dados para o sistema hospitalar, notou-se a necessidade de expansão das funcionalidades,senda elas para o controle na internação de pacientes. Será necessário expandir o Modelo ER desenvolvido e montar o banco de dados, criando as tabelas para o início dos testes.
