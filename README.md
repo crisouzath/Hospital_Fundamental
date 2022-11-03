@@ -12,3 +12,4 @@ Um pequeno hospital local busca desenvolver um novo sistema que atenda melhor à
 > As consultas também têm sido registradas com data e hora de realização, médico responsável, paciente, valor da consulta ou nome do convênio, com o número da carteira. Também é necessário indicar na consulta qual a especialidade buscada pelo paciente.<br><br>
 
 > Deseja-se ainda informatizar a receita do médico, de maneira que, no encerramento da consulta, ele possa registrar os medicamentos receitados, a quantidade e as instruções de uso.
+<img src='https://user-images.githubusercontent.com/111239606/199724427-f71c7227-8870-4319-aaf3-148c07ac867f.png'>
