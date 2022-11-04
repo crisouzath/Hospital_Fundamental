@@ -171,4 +171,3 @@ ALTER TABLE `quarto` ADD FOREIGN KEY (`tipo_fk`) REFERENCES `tipo_quarto` (`id_t
 <br>
 
 ### Parte 3
-## Parte 3
