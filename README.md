@@ -33,6 +33,10 @@ Após a primeira versão do projeto de banco de dados para o sistema hospitalar,
 
 >A internação, obviamente, é vinculada a um paciente – que pode se internar mais de uma vez no hospital – e a um único médico responsável.
 
+>uma seta
+
+>>duas
+
 <div align='center'>
 <img src='https://user-images.githubusercontent.com/111239606/199850715-9de1232a-0b17-4758-8b9c-af0de0c4e534.png'>
 </div>
