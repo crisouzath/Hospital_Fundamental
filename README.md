@@ -38,8 +38,9 @@ Após a primeira versão do projeto de banco de dados para o sistema hospitalar,
 </div>
 <br><br>
 
->Por último, crie um script SQL para a geração do banco de dados
-```CREATE DATABASE IF NOT EXISTS `hospital_fundamental`;
+>Por último, crie um script SQL para a geração do banco de dados<br>
+```
+CREATE DATABASE IF NOT EXISTS `hospital_fundamental`;
 
 USE `hospital_fundamental`;
 
