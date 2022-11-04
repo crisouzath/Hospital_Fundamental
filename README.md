@@ -170,4 +170,93 @@ ALTER TABLE `quarto` ADD FOREIGN KEY (`tipo_fk`) REFERENCES `tipo_quarto` (`id_t
 ```
 <br>
 
-### Parte 3
+### Parte 3 - Alimentando o Banco de Dados
+Com o banco de dados para o sistema hospitalar completamente montado, é necessário incluir dados para realizar os devidos testes e validar sua viabilidade quanto ao sistema. <br><br>
+>Inclua ao menos dez médicos de ao menos sete especialidades (considere a afirmação de que “entre as especialidades há pediatria, clínica geral, gastroenterologia e dermatologia”).<br>
+
+`Inserindo dados na tabela 'cargo': ` 
+```
+INSERT INTO cargo(id_cargo, nome_cargo) 
+VALUES (null, 'Generalista');
+
+INSERT INTO cargo(id_cargo, nome_cargo) 
+VALUES (null, 'Especialista');
+
+INSERT INTO cargo(id_cargo, nome_cargo) 
+VALUES (null, 'Residente');
+```
+`Inserindo dados na tabela 'especialidade':`
+```
+INSERT INTO especialidade (id_especialidade, nome_especialidade) 
+VALUES (null, 'Pediatria');
+
+INSERT INTO especialidade (id_especialidade, nome_especialidade) 
+VALUES (null, 'Clínica Geral');
+
+INSERT INTO especialidade (id_especialidade, nome_especialidade) 
+VALUES (null, 'Gastroenterologia');
+
+INSERT INTO especialidade (id_especialidade, nome_especialidade) 
+VALUES (null, 'Dermatologia');
+
+INSERT INTO especialidade (id_especialidade, nome_especialidade) 
+VALUES (null, 'Cardiologista');
+
+INSERT INTO especialidade (id_especialidade, nome_especialidade) 
+VALUES (null, 'Radiologista');
+
+INSERT INTO especialidade (id_especialidade, nome_especialidade) 
+VALUES (null, 'Geriatria');
+```
+`Inserindo dados e endereços dos médicos`
+```
+INSERT INTO endereco(id_endereco, rua, numero, cep) 
+VALUES (null, 'Rua dos Palmares', '45', '09032-090');
+INSERT INTO medico(id_medico, nome_completo, endereco_fk, telefone, cpf, rg, cargo_fk, especialidade_fk ) 
+VALUES (null, 'Eduardo Alves da Silva', 1, '(11)99678-9999', '337.787.888-00', '30.456.432-3', 2, 1);
+
+INSERT INTo endereco(id_endereco, rua, numero, cep) 
+VALUES (null, 'Avenida Romana II', '4390', '29383-070');
+INSERT INTO medico(id_medico, nome_completo, endereco_fk, telefone, cpf, rg, cargo_fk, especialidade_fk ) 
+VALUES (null, 'Rosemeire Domingues Rosa', 2, '(11)97368-3899', '782.902.485-41', '85.478.445-7', 2, 1);
+
+INSERT INTO endereco(id_endereco, rua, numero, cep) 
+VALUES (null, 'Rua Custodio de Mendonça', '685', '29332-090');
+INSERT INTO medico(id_medico, nome_completo, endereco_fk, telefone, cpf, rg, cargo_fk, especialidade_fk ) 
+VALUES (null, 'Moasir Júnior Vieira', 3, '(11)94445-7484', '445.455.455-85', '54.745.478-5', 1, 2);
+
+INSERT INTO endereco(id_endereco, rua, numero, cep) 
+VALUES (null, 'Rua Ralados', '45', '03784-090');
+INSERT INTO medico(id_medico, nome_completo, endereco_fk, telefone, cpf, rg, cargo_fk, especialidade_fk ) 
+VALUES (null, 'Rodrigo Ferreira', 4, '(11)97885-7484', '632.454.784-85', '54.745.478-5', 2, 3);
+
+INSERT INTO endereco(id_endereco, rua, numero, cep) 
+VALUES (null, 'Avenida Antartica', '293', '09032-090');
+INSERT INTO medico(id_medico, nome_completo, endereco_fk, telefone, cpf, rg, cargo_fk, especialidade_fk ) 
+VALUES (null, 'Maria Lúcia dos Anjos', 5, '(11)94515-7484', '582.455.455-85', '54.855.233-5', 2, 4);
+
+INSERT INTO endereco(id_endereco, rua, numero, cep) 
+VALUES (null, "Rua Le'Charple", '94', '0837-090');
+INSERT INTO medico(id_medico, nome_completo, endereco_fk, telefone, cpf, rg, cargo_fk, especialidade_fk ) 
+VALUES (null, 'Victor Martins de Sousa', 6, '(11)95865-7455', '458.455.455-85', '54.744.855-5', 2, 5);
+
+INSERT INTO endereco(id_endereco, rua, numero, cep) 
+VALUES (null, 'Avenida Romúlo', '9303', '03822-090');
+INSERT INTO medico(id_medico, nome_completo, endereco_fk, telefone, cpf, rg, cargo_fk, especialidade_fk ) 
+VALUES (null, 'Rubens Silva Lima', 7, '(11)95865-7455', '844.451.965-85', '54.566.855-5', 2, 6);
+
+INSERT INTO endereco(id_endereco, rua, numero, cep) 
+VALUES (null, 'Rua Guaiçara', '3232', '03838-090');
+INSERT INTO medico(id_medico, nome_completo, endereco_fk, telefone, cpf, rg, cargo_fk, especialidade_fk ) 
+VALUES (null, 'Roberta Avelar', 8, '(11)95865-7455', '566.899.321-85', '54.744.633-5', 2, 7);
+
+INSERT INTO endereco(id_endereco, rua, numero, cep) 
+VALUES (null, 'Avenida de Dom Pedro III', '839', '03883-090');
+INSERT INTO medico(id_medico, nome_completo, endereco_fk, telefone, cpf, rg, cargo_fk, especialidade_fk ) 
+VALUES (null, 'Urubatan Sampaio', 9, '(11)95865-7455', '845.855.845-85', '54.744.230-5', 3, 1);
+
+INSERT INTO endereco(id_endereco, rua, numero, cep) 
+VALUES (null, 'Rua dos Palmares', '45', '02933-090');
+INSERT INTO medico(id_medico, nome_completo, endereco_fk, telefone, cpf, rg, cargo_fk, especialidade_fk ) 
+VALUES (null, 'Alfonso Queróis', 10, '(11)95865-7455', '896.562.485-85', '54.480.855-5', 3, 5);
+```
