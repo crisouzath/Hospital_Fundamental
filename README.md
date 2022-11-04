@@ -168,5 +168,6 @@ ALTER TABLE `internacao` ADD FOREIGN KEY (`enfermeiro_fk`) REFERENCES `enfermeir
 
 ALTER TABLE `quarto` ADD FOREIGN KEY (`tipo_fk`) REFERENCES `tipo_quarto` (`id_tipo`);
 ```
-<br>
+<br><br>
+
 ### Parte 3
