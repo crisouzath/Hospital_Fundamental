@@ -39,3 +39,134 @@ Após a primeira versão do projeto de banco de dados para o sistema hospitalar,
 <br><br>
 
 >Por último, crie um script SQL para a geração do banco de dados
+```CREATE DATABASE IF NOT EXISTS `hospital_fundamental`;
+
+USE `hospital_fundamental`;
+
+CREATE TABLE IF NOT EXISTS `paciente` (
+  `id_paciente` int PRIMARY KEY AUTO_INCREMENT,
+  `nome_completo` varchar(255),
+  `data_nascimento` date,
+  `endereco_fk` int,
+  `telefone` varchar(255),
+  `email` varchar(255),
+  `rg` varchar(255),
+  `cpf` varchar(255),
+  `convenio_fk` int
+);
+
+CREATE TABLE IF NOT EXISTS `convenio` (
+  `id_convenio` int PRIMARY KEY AUTO_INCREMENT,
+  `nome` varchar(255),
+  `cnpj` varchar(255),
+  `tempo_carencia` int
+);
+
+CREATE TABLE IF NOT EXISTS `medico` (
+  `id_medico` int PRIMARY KEY AUTO_INCREMENT,
+  `nome_completo` varchar(255),
+  `endereco` int,
+  `telefone` varchar(255),
+  `cpf` varchar(255),
+  `rg` varchar(255),
+  `cargo_fk` int,
+  `especialidade_fk` int
+);
+
+CREATE TABLE IF NOT EXISTS `cargo` (
+  `id_cargo` int PRIMARY KEY AUTO_INCREMENT,
+  `nome_cargo` varchar(255)
+);
+
+CREATE TABLE IF NOT EXISTS `especialidade` (
+  `id_especialidade` int PRIMARY KEY AUTO_INCREMENT,
+  `nome_especialidade` varchar(255)
+);
+
+CREATE TABLE IF NOT EXISTS `consulta` (
+  `id_consulta` int PRIMARY KEY AUTO_INCREMENT,
+  `data` date,
+  `hora` time,
+  `medico_fk` int,
+  `paciente_fk` int,
+  `valor_consulta` int,
+  `nome_convenio` int,
+  `especialidade` int,
+  `receita_fk` int
+);
+
+CREATE TABLE IF NOT EXISTS `receita` (
+  `id_receita` int PRIMARY KEY AUTO_INCREMENT,
+  `paciente` int,
+  `medico` int,
+  `medicamentos` varchar(255),
+  `quatidade` varchar(255),
+  `instrucoes` varchar(255)
+);
+
+CREATE TABLE IF NOT EXISTS `endereco` (
+  `id_endereco` int PRIMARY KEY AUTO_INCREMENT,
+  `rua` varchar(255),
+  `numero` varchar(255),
+  `cep` varchar(255)
+);
+
+CREATE TABLE IF NOT EXISTS `enfermeiro` (
+  `id_enfermeiro` int PRIMARY KEY AUTO_INCREMENT,
+  `nome_completo` varchar(255),
+  `cpf` varchar(255),
+  `cre` varchar(255)
+);
+
+CREATE TABLE IF NOT EXISTS `internacao` (
+  `id_internacao` int PRIMARY KEY AUTO_INCREMENT,
+  `quarto_fk` int,
+  `paciente_fk` int,
+  `medico_fk` int,
+  `enfermeiro_fk` int,
+  `data_entrada` date,
+  `data_prev_saida` date,
+  `data_alta` date,
+  `procedimento` varchar(255)
+);
+
+CREATE TABLE IF NOT EXISTS `quarto` (
+  `id_quarto` int PRIMARY KEY AUTO_INCREMENT,
+  `numero` int,
+  `tipo_fk` int
+);
+
+CREATE TABLE IF NOT EXISTS `tipo_quarto` (
+  `id_tipo` int PRIMARY KEY AUTO_INCREMENT,
+  `descricao` varchar(255),
+  `valor_diaria` int
+);
+
+ALTER TABLE `paciente` ADD FOREIGN KEY (`endereco_fk`) REFERENCES `endereco` (`id_endereco`);
+
+ALTER TABLE `paciente` ADD FOREIGN KEY (`convenio_fk`) REFERENCES `convenio` (`id_convenio`);
+
+ALTER TABLE `medico` ADD FOREIGN KEY (`endereco`) REFERENCES `endereco` (`id_endereco`);
+
+ALTER TABLE `medico` ADD FOREIGN KEY (`cargo_fk`) REFERENCES `cargo` (`id_cargo`);
+
+ALTER TABLE `medico` ADD FOREIGN KEY (`especialidade_fk`) REFERENCES `especialidade` (`id_especialidade`);
+
+ALTER TABLE `consulta` ADD FOREIGN KEY (`medico_fk`) REFERENCES `medico` (`id_medico`);
+
+ALTER TABLE `consulta` ADD FOREIGN KEY (`paciente_fk`) REFERENCES `paciente` (`id_paciente`);
+
+ALTER TABLE `consulta` ADD FOREIGN KEY (`receita_fk`) REFERENCES `receita` (`id_receita`);
+
+ALTER TABLE `internacao` ADD FOREIGN KEY (`quarto_fk`) REFERENCES `quarto` (`id_quarto`);
+
+ALTER TABLE `internacao` ADD FOREIGN KEY (`paciente_fk`) REFERENCES `paciente` (`id_paciente`);
+
+ALTER TABLE `internacao` ADD FOREIGN KEY (`medico_fk`) REFERENCES `medico` (`id_medico`);
+
+ALTER TABLE `internacao` ADD FOREIGN KEY (`enfermeiro_fk`) REFERENCES `enfermeiro` (`id_enfermeiro`);
+
+ALTER TABLE `quarto` ADD FOREIGN KEY (`tipo_fk`) REFERENCES `tipo_quarto` (`id_tipo`);
+
+
+```
