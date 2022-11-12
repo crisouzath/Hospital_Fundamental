@@ -189,24 +189,6 @@ VALUES (null, 'Residente');
 ```
 INSERT INTO especialidade (id_especialidade, nome_especialidade) 
 VALUES (null, 'Pediatria');
-
-INSERT INTO especialidade (id_especialidade, nome_especialidade) 
-VALUES (null, 'Clínica Geral');
-
-INSERT INTO especialidade (id_especialidade, nome_especialidade) 
-VALUES (null, 'Gastroenterologia');
-
-INSERT INTO especialidade (id_especialidade, nome_especialidade) 
-VALUES (null, 'Dermatologia');
-
-INSERT INTO especialidade (id_especialidade, nome_especialidade) 
-VALUES (null, 'Cardiologista');
-
-INSERT INTO especialidade (id_especialidade, nome_especialidade) 
-VALUES (null, 'Radiologista');
-
-INSERT INTO especialidade (id_especialidade, nome_especialidade) 
-VALUES (null, 'Geriatria');
 ```
 `Inserindo dados e endereços dos médicos`
 ```
