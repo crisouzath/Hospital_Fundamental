@@ -197,3 +197,20 @@ VALUES (null, 'Rua dos Palmares', '45', '09032-090');
 INSERT INTO medico(id_medico, nome_completo, endereco_fk, telefone, cpf, rg, cargo_fk, especialidade_fk ) 
 VALUES (null, 'Eduardo Alves da Silva', 1, '(11)99678-9999', '337.787.888-00', '30.456.432-3', 2, 1);
 ```
+<br>
+
+>Inclua ao menos 15 pacientes.
+
+`Adicionando dados a tabela convênio primeiro`
+```
+insert into convenio(id_convenio, nome, cnpj, tempo_carencia) 
+values (null, 'Ambulatorial', '23.400.768/0001-43', '24 horas');
+```
+`Cadastrando os pacientes e seus endereços`
+```
+INSERT INTO endereco(id_endereco, rua, numero, cep) 
+VALUES (null, 'Rua Getúlio Vargas', '267', '85818-680');
+INSERT INTO paciente(id_paciente, nome_completo, data_nascimento, endereco_fk, email, telefone, cpf, rg, convenio_fk ) 
+VALUES (null, 'Ruan Luiz Renan da Mota', '2001-02-19', 11,'ruan.luiz.damota@gmail.com', '(11)98597-4585', '245.505.673-25', '38.571.245-5', 1);
+
+```
