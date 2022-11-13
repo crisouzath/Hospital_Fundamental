@@ -223,5 +223,5 @@ VALUES (null, 'Ruan Luiz Renan da Mota', '2001-02-19', 11,'ruan.luiz.damota@gmai
 INSERT INTO receita(id_receita, paciente_fk, medico_fk, medicamentos, quantidade, instrucoes)
 VALUES (null, 1,8, "Dipirona", "1 comprimido","1 comprimido a cada dois dias no periodo de uma semana");
 INSERT INTO consulta(id_consulta, data, hora, medico_fk, paciente_fk, valor_consulta, convenio_fk, especialidade, receita_fk)
-VALUES(null, '2015-06-38', '10:00:00', 8, 1, 1000.00, null, 1, 3);
+VALUES(null, '2015-06-38', '10:00:00', 8, 1, 100.00, null, 1, 3);
 ```
