@@ -214,3 +214,12 @@ INSERT INTO paciente(id_paciente, nome_completo, data_nascimento, endereco_fk, e
 VALUES (null, 'Ruan Luiz Renan da Mota', '2001-02-19', 11,'ruan.luiz.damota@gmail.com', '(11)98597-4585', '245.505.673-25', '38.571.245-5', 1);
 
 ```
+<br>
+
+>Registre 20 consultas de diferentes pacientes e diferentes médicos (alguns pacientes realizam mais que uma consulta). As consultas devem ter ocorrido entre 01/01/2015 e 01/01/2022. Ao menos dez consultas devem ter receituário com dois ou mais medicamentos.
+```
+INSERT INTO receita(id_receita, paciente_fk, medico_fk, medicamentos, quantidade, instrucoes)
+VALUES (null, 1,8, "Dipirona", "1 comprimida","1 comprimido a cada dois dias no periodo de uma semana");
+INSERT INTO consulta(id_consulta, data, hora, medico_fk, paciente_fk, valor_consulta, convenio_fk, especialidade, receita_fk)
+VALUES(null, '2015-06-38', '10:00:00', 8, 1, 1000.00, null, 1, 3);
+```
