@@ -199,9 +199,13 @@ VALUES (null, 'Eduardo Alves da Silva', 1, '(11)99678-9999', '337.787.888-00', '
 ```
 <br>
 
->Inclua ao menos 15 pacientes e inclua ao menos quatro convênios médicos, associe ao menos cinco pacientes.
+>Inclua ao menos 15 pacientes.
 
-`Adicionando dados a tabela convênio primeiro`
+>Registre 20 consultas de diferentes pacientes e diferentes médicos (alguns pacientes realizam mais que uma consulta). As consultas devem ter ocorrido entre 01/01/2015 e 01/01/2022. Ao menos dez consultas devem ter receituário com dois ou mais medicamentos.
+
+>Inclua ao menos quatro convênios médicos, associe ao menos cinco pacientes e cinco consultas.
+
+`Adicionando dados a tabela 'convênio'`
 ```
 insert into convenio(id_convenio, nome, cnpj, tempo_carencia) 
 values (null, 'Ambulatorial', '23.400.768/0001-43', '24 horas');
@@ -214,12 +218,10 @@ INSERT INTO paciente(id_paciente, nome_completo, data_nascimento, endereco_fk, e
 VALUES (null, 'Ruan Luiz Renan da Mota', '2001-02-19', 11,'ruan.luiz.damota@gmail.com', '(11)98597-4585', '245.505.673-25', '38.571.245-5', 1);
 
 ```
-<br>
-
->Registre 20 consultas de diferentes pacientes e diferentes médicos (alguns pacientes realizam mais que uma consulta). As consultas devem ter ocorrido entre 01/01/2015 e 01/01/2022. Ao menos dez consultas devem ter receituário com dois ou mais medicamentos.
+`Cadastrando as consultas e criando as receitas`
 ```
 INSERT INTO receita(id_receita, paciente_fk, medico_fk, medicamentos, quantidade, instrucoes)
-VALUES (null, 1,8, "Dipirona", "1 comprimida","1 comprimido a cada dois dias no periodo de uma semana");
+VALUES (null, 1,8, "Dipirona", "1 comprimido","1 comprimido a cada dois dias no periodo de uma semana");
 INSERT INTO consulta(id_consulta, data, hora, medico_fk, paciente_fk, valor_consulta, convenio_fk, especialidade, receita_fk)
 VALUES(null, '2015-06-38', '10:00:00', 8, 1, 1000.00, null, 1, 3);
 ```
