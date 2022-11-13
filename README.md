@@ -8,7 +8,7 @@ O Hospital Fundamental foi uma atividade exigida durante o curso no Instituto PR
 <img width='500px' src='https://user-images.githubusercontent.com/111239606/199851587-7ab4e7ce-150e-442b-a27b-cce39b8f9d51.gif'>
 </div>
 
-### Parte 1
+### PARTE 1
 Um pequeno hospital local busca desenvolver um novo sistema que atenda melhor às suas necessidades, espera-se que os dados sejam transferidos para o novo sistema assim que ele estiver funcional. Neste momento, o hospital necessita de um sistema para sua área clínica que ajude a controlar consultas realizadas, sendo necessário analisar com cuidado as necessidades desse cliente e sugerir uma estrutura de banco de dados adequada por meio de um Diagrama Entidade-Relacionamento.<br><br>
 
 > Os médicos podem ser generalistas, especialistas ou residentes e têm seus dados pessoais cadastrados em planilhas digitais. Cada médico pode ter uma ou mais especialidades, que podem ser pediatria, clínica geral, gastroenterologia e dermatologia. Alguns registros antigos ainda estão em formulário de papel, mas será necessário incluir esses dados no novo sistema.
@@ -21,7 +21,7 @@ Um pequeno hospital local busca desenvolver um novo sistema que atenda melhor à
 
 <img src='https://user-images.githubusercontent.com/111239606/199850096-4fd3db56-0c63-4997-97d6-7f6d48ebe39e.png'><br><br>
 
-### Parte 2
+### PARTE 2
 Após a primeira versão do projeto de banco de dados para o sistema hospitalar, notou-se a necessidade de expansão das funcionalidades,senda elas para o controle na internação de pacientes. Será necessário expandir o Modelo ER desenvolvido e montar o banco de dados, criando as tabelas para o início dos testes.<br><br>
 >Para cada internação, são anotadas a data de entrada, a data prevista de alta e a data efetiva de alta, além da descrição textual dos procedimentos a serem realizados.
 
@@ -179,7 +179,7 @@ ALTER TABLE `quarto` ADD FOREIGN KEY (`tipo_fk`) REFERENCES `tipo_quarto` (`id_t
 ```
 <br>
 
-### Parte 3 - Alimentando o Banco de Dados
+### PARTE 3 - Alimentando o Banco de Dados
 Com o banco de dados para o sistema hospitalar completamente montado, é necessário incluir dados para realizar os devidos testes e validar sua viabilidade quanto ao sistema. <br><br>
 >Inclua ao menos dez médicos de ao menos sete especialidades (considere a afirmação de que “entre as especialidades há pediatria, clínica geral, gastroenterologia e dermatologia”).<br>
 
@@ -270,4 +270,30 @@ VALUES (null, 'Angelo Domingues', '87459612', '784169');
 ```
 INSERT INTO internacao(id_internacao, quarto_fk, paciente_fk, medico_fk, enfermeiro_fk, enfermeiro_auxiliar_fk, data_entrada, data_prev_saida, data_alta, procedimento)
 VALUES(null, 1, 12, 6, 1, 2, '2015-12-08', '2016-01-04', '2016-01-10', "Trocar as bombas de redenção de liquido");
+```
+<br>
+
+### PARTE 4 - Alterando o banco de dados
+Pensando no banco que já foi criado para o Projeto do Hospital, realize algumas alterações nas tabelas e nos dados usando comandos de atualização e exclusão
+>Crie um script que adicione uma coluna “em_atividade” para os médicos, indicando se ele ainda está atuando no hospital ou não. 
+
+```
+ALTER TABLE medico ADD em_atividade varchar(255);
+```
+>Crie um script para atualizar ao menos dois médicos como inativos e os demais em atividade.
+
+```
+UPDATE medico SET em_atividade = CASE id_medico
+WHEN 1 THEN 'Ativo'
+WHEN 2 THEN 'Ativo'
+WHEN 3 THEN 'Inativo'
+WHEN 4 THEN 'Ativo'
+WHEN 5 THEN 'Ativo'
+WHEN 6 THEN 'Ativo'
+WHEN 7 THEN 'Inativo'
+WHEN 8 THEN 'Ativo'
+WHEN 9 THEN 'Ativo'
+WHEN 10 THEN 'Ativo'
+END
+WHERE id_medico IN (1,2,3,4,5,6,7,8,9,10)
 ```
