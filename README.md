@@ -215,7 +215,7 @@ values (null, 'Ambulatorial', '23.400.768/0001-43', '24 horas');
 INSERT INTO endereco(id_endereco, rua, numero, cep) 
 VALUES (null, 'Rua Getúlio Vargas', '267', '85818-680');
 INSERT INTO paciente(id_paciente, nome_completo, data_nascimento, endereco_fk, email, telefone, cpf, rg, convenio_fk ) 
-VALUES (null, 'Ruan Luiz Renan da Mota', '2001-02-19', 11,'ruan.luiz.damota@gmail.com', '(11)98597-4585', '245.505.673-25', '38.571.245-5', 1);
+VALUES (null, 'Ruan Mota', '2001-02-19', 11,'ruan.luiz.damota@gmail.com', '(11)98597-4585', '245.505.673-25', '38.571.245-5', 1);
 
 ```
 `Cadastrando as consultas e criando as receitas`
