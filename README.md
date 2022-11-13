@@ -59,13 +59,13 @@ CREATE TABLE IF NOT EXISTS `convenio` (
   `id_convenio` int PRIMARY KEY AUTO_INCREMENT,
   `nome` varchar(255),
   `cnpj` varchar(255),
-  `tempo_carencia` int
+  `tempo_carencia` varchar(255)
 );
 
 CREATE TABLE IF NOT EXISTS `medico` (
   `id_medico` int PRIMARY KEY AUTO_INCREMENT,
   `nome_completo` varchar(255),
-  `endereco` int,
+  `endereco_fk` int,
   `telefone` varchar(255),
   `cpf` varchar(255),
   `rg` varchar(255),
@@ -90,17 +90,17 @@ CREATE TABLE IF NOT EXISTS `consulta` (
   `medico_fk` int,
   `paciente_fk` int,
   `valor_consulta` int,
-  `nome_convenio` int,
+  `convenio_fk` int,
   `especialidade` int,
   `receita_fk` int
 );
 
 CREATE TABLE IF NOT EXISTS `receita` (
   `id_receita` int PRIMARY KEY AUTO_INCREMENT,
-  `paciente` int,
-  `medico` int,
+  `paciente_fk` int,
+  `medico_fk` int,
   `medicamentos` varchar(255),
-  `quatidade` varchar(255),
+  `quantidade` varchar(255),
   `instrucoes` varchar(255)
 );
 
@@ -124,6 +124,7 @@ CREATE TABLE IF NOT EXISTS `internacao` (
   `paciente_fk` int,
   `medico_fk` int,
   `enfermeiro_fk` int,
+  `enfermeiro_auxiliar_fk` int,
   `data_entrada` date,
   `data_prev_saida` date,
   `data_alta` date,
@@ -146,7 +147,7 @@ ALTER TABLE `paciente` ADD FOREIGN KEY (`endereco_fk`) REFERENCES `endereco` (`i
 
 ALTER TABLE `paciente` ADD FOREIGN KEY (`convenio_fk`) REFERENCES `convenio` (`id_convenio`);
 
-ALTER TABLE `medico` ADD FOREIGN KEY (`endereco`) REFERENCES `endereco` (`id_endereco`);
+ALTER TABLE `medico` ADD FOREIGN KEY (`endereco_fk`) REFERENCES `endereco` (`id_endereco`);
 
 ALTER TABLE `medico` ADD FOREIGN KEY (`cargo_fk`) REFERENCES `cargo` (`id_cargo`);
 
@@ -154,9 +155,15 @@ ALTER TABLE `medico` ADD FOREIGN KEY (`especialidade_fk`) REFERENCES `especialid
 
 ALTER TABLE `consulta` ADD FOREIGN KEY (`medico_fk`) REFERENCES `medico` (`id_medico`);
 
+ALTER TABLE `consulta` ADD FOREIGN KEY (`convenio_fk`) REFERENCES `convenio` (`id_convenio`);
+
 ALTER TABLE `consulta` ADD FOREIGN KEY (`paciente_fk`) REFERENCES `paciente` (`id_paciente`);
 
 ALTER TABLE `consulta` ADD FOREIGN KEY (`receita_fk`) REFERENCES `receita` (`id_receita`);
+
+ALTER TABLE `receita` ADD FOREIGN KEY (`paciente_fk`) REFERENCES `paciente` (`id_paciente`);
+
+ALTER TABLE `receita` ADD FOREIGN KEY (`medico_fk`) REFERENCES `medico` (`id_medico`);
 
 ALTER TABLE `internacao` ADD FOREIGN KEY (`quarto_fk`) REFERENCES `quarto` (`id_quarto`);
 
@@ -165,6 +172,8 @@ ALTER TABLE `internacao` ADD FOREIGN KEY (`paciente_fk`) REFERENCES `paciente` (
 ALTER TABLE `internacao` ADD FOREIGN KEY (`medico_fk`) REFERENCES `medico` (`id_medico`);
 
 ALTER TABLE `internacao` ADD FOREIGN KEY (`enfermeiro_fk`) REFERENCES `enfermeiro` (`id_enfermeiro`);
+
+ALTER TABLE `internacao` ADD FOREIGN KEY (`enfermeiro_auxiliar_fk`) REFERENCES `enfermeiro` (`id_enfermeiro`);
 
 ALTER TABLE `quarto` ADD FOREIGN KEY (`tipo_fk`) REFERENCES `tipo_quarto` (`id_tipo`);
 ```
@@ -209,7 +218,7 @@ VALUES (null, 'Eduardo Alves da Silva', 1, '(11)99678-9999', '337.787.888-00', '
 `Adicionando dados a tabela 'convênio'`
 ```
 INSERT INTO convenio(id_convenio, nome, cnpj, tempo_carencia) 
-VALUES (null, 'Ambulatorial', '23.400.768/0001-43', '24 horas');
+VALUES (null, 'AMIvida', '23.400.768/0001-43', '24 horas');
 ```
 `Cadastrando os pacientes e seus endereços`
 ```
@@ -246,4 +255,19 @@ VALUES (null, 'Apartamento', 6000.00);
 
 INSERT INTO tipo_quarto(id_tipo,descricao,valor_diaria) 
 VALUES (null, 'Enfermaria', 2000.00);
+```
+`Inserindo dados dos quartos`
+```
+INSERT INTO quarto(id_quarto, numero, tipo_fk) 
+VALUES (null, 456, 1);
+```
+`Inserindo os dados dos enfermeiros`
+```
+INSERT INTO enfermeiro(id_enfermeiro, nome_completo, cpf, cre) 
+VALUES (null, 'Angelo Domingues', '87459612', '784169');
+```
+`Adicionando internações`
+```
+INSERT INTO internacao(id_internacao, quarto_fk, paciente_fk, medico_fk, enfermeiro_fk, enfermeiro_auxiliar_fk, data_entrada, data_prev_saida, data_alta, procedimento)
+VALUES(null, 1, 12, 6, 1, 2, '2015-12-08', '2016-01-04', '2016-01-10', "Trocar as bombas de redenção de liquido");
 ```
