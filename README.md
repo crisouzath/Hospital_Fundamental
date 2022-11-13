@@ -194,6 +194,7 @@ VALUES (null, 'Pediatria');
 ```
 INSERT INTO endereco(id_endereco, rua, numero, cep) 
 VALUES (null, 'Rua dos Palmares', '45', '09032-090');
+
 INSERT INTO medico(id_medico, nome_completo, endereco_fk, telefone, cpf, rg, cargo_fk, especialidade_fk ) 
 VALUES (null, 'Eduardo Alves da Silva', 1, '(11)99678-9999', '337.787.888-00', '30.456.432-3', 2, 1);
 ```
@@ -207,13 +208,14 @@ VALUES (null, 'Eduardo Alves da Silva', 1, '(11)99678-9999', '337.787.888-00', '
 
 `Adicionando dados a tabela 'convênio'`
 ```
-insert into convenio(id_convenio, nome, cnpj, tempo_carencia) 
-values (null, 'Ambulatorial', '23.400.768/0001-43', '24 horas');
+INSERT INTO convenio(id_convenio, nome, cnpj, tempo_carencia) 
+VALUES (null, 'Ambulatorial', '23.400.768/0001-43', '24 horas');
 ```
 `Cadastrando os pacientes e seus endereços`
 ```
 INSERT INTO endereco(id_endereco, rua, numero, cep) 
 VALUES (null, 'Rua Getúlio Vargas', '267', '85818-680');
+
 INSERT INTO paciente(id_paciente, nome_completo, data_nascimento, endereco_fk, email, telefone, cpf, rg, convenio_fk ) 
 VALUES (null, 'Ruan Mota', '2001-02-19', 11,'ruan.mota@gmail.com', '(11)98597-4585', '245.505.673-25', '38.571.245-5', 1);
 
@@ -222,6 +224,26 @@ VALUES (null, 'Ruan Mota', '2001-02-19', 11,'ruan.mota@gmail.com', '(11)98597-45
 ```
 INSERT INTO receita(id_receita, paciente_fk, medico_fk, medicamentos, quantidade, instrucoes)
 VALUES (null, 1,8, "Dipirona", "1 comprimido","1 comprimido a cada dois dias no periodo de uma semana");
+
 INSERT INTO consulta(id_consulta, data, hora, medico_fk, paciente_fk, valor_consulta, convenio_fk, especialidade, receita_fk)
 VALUES(null, '2015-06-38', '10:00:00', 8, 1, 100.00, null, 1, 3);
+```
+<br>
+
+>Registre ao menos sete internações. Pelo menos dois pacientes devem ter se internado mais de uma vez. Ao menos três quartos devem ser cadastrados. As internações devem ter ocorrido entre 01/01/2015 e 01/01/2022.
+
+>Considerando que “a princípio o hospital trabalha com apartamentos, quartos duplos e enfermaria”, inclua ao menos esses três tipos com valores diferentes.
+
+>Inclua dados de dez profissionais de enfermaria. Associe cada internação a ao menos dois enfermeiros.
+
+`Inserindo os tipos de quartos`
+```
+INSERT INTO tipo_quarto(id_tipo,descricao,valor_diaria) 
+VALUES (null, 'Quarto duplo', 4000.00);
+
+INSERT INTO tipo_quarto(id_tipo,descricao,valor_diaria) 
+VALUES (null, 'Apartamento', 6000.00);
+
+INSERT INTO tipo_quarto(id_tipo,descricao,valor_diaria) 
+VALUES (null, 'Enfermaria', 2000.00);
 ```
