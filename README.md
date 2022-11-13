@@ -199,7 +199,7 @@ VALUES (null, 'Eduardo Alves da Silva', 1, '(11)99678-9999', '337.787.888-00', '
 ```
 <br>
 
->Inclua ao menos 15 pacientes.
+>Inclua ao menos 15 pacientes e inclua ao menos quatro convênios médicos, associe ao menos cinco pacientes.
 
 `Adicionando dados a tabela convênio primeiro`
 ```
