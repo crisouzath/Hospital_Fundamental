@@ -297,3 +297,122 @@ WHEN 10 THEN 'Ativo'
 END
 WHERE id_medico IN (1,2,3,4,5,6,7,8,9,10)
 ```
+
+### PARTE 5 - Consultas
+Crie um script e nele inclua consultas que retornem:
+>Todos os dados e o valor médio das consultas do ano de 2020 e das que foram feitas sob convênio.
+
+```
+SELECT *, AVG(valor_consulta) 
+FROM consulta 
+GROUP BY convenio_fk 
+HAVING YEAR(data) = '2020';
+```
+
+>Todos os dados das internações que tiveram data de alta maior que a data prevista para a alta.
+
+```
+SELECT * 
+FROM internacao 
+WHERE data_alta > data_prev_saida;
+```
+
+>Receituário completo da primeira consulta registrada com receituário associado.
+```
+SELECT receita.medicamentos, receita.quantidade, receita.instrucoes, paciente.nome_completo AS paciente_nome, medico.nome_completo AS medico_paciente  
+FROM receita 
+INNER JOIN paciente 
+ON receita.paciente_fk=paciente.id_paciente
+INNER JOIN medico 
+ON receita.medico_fk=medico.id_medico
+ORDER BY receita.id_receita
+LIMIT 1;
+```
+
+>Todos os dados da consulta de maior valor e também da de menor valor (ambas as consultas não foram realizadas sob convênio).
+
+```
+select *, MAX(valor_consulta), MIN(valor_consulta) 
+FROM consulta 
+GROUP BY convenio_fk IS NULL;
+```
+
+>Todos os dados das internações em seus respectivos quartos, calculando o total da internação a partir do valor de diária do quarto e o número de dias entre a entrada e a alta.
+
+```
+SELECT internacao.id_internacao, quarto.id_quarto, DATEDIFF(data_alta, data_entrada) AS dias_em_uso, tipo_quarto.valor_diaria, DATEDIFF(data_alta, data_entrada) * tipo_quarto.valor_diaria valor_total 
+FROM internacao
+INNER JOIN quarto 
+ON internacao.quarto_fk = quarto.id_quarto
+INNER JOIN tipo_quarto
+ON quarto.tipo_fk = tipo_quarto.id_tipo 
+GROUP BY id_internacao;
+```
+
+>Data, procedimento e número de quarto de internações em quartos do tipo “apartamento”.
+
+```
+ SELECT internacao.data_entrada, internacao.procedimento, quarto.numero 
+ FROM internacao 
+ INNER JOIN quarto 
+ ON quarto.id_quarto = internacao.quarto_fk 
+ WHERE quarto.tipo_fk = 2;
+```
+
+>Nome do paciente, data da consulta e especialidade de todas as consultas em que os pacientes eram menores de 18 anos na data da consulta e cuja especialidade não seja “pediatria”, ordenando por data de realização da consulta.
+
+```
+SELECT paciente.nome_completo, consulta.data, especialidade.nome_especialidade 
+FROM consulta 
+INNER JOIN paciente 
+ON paciente.id_paciente = consulta.paciente_fk 
+INNER JOIN especialidade 
+ON especialidade.id_especialidade = consulta.especialidade 
+WHERE consulta.especialidade <> 1 AND YEAR(consulta.data) - YEAR(paciente.data_nascimento) < 19 AND YEAR(consulta.data) - YEAR(paciente.data_nascimento) > 0
+ORDER BY consulta.data;
+```
+
+>Nome do paciente, nome do médico, data da internação e procedimentos das internações realizadas por médicos da especialidade “gastroenterologia”, que tenham acontecido em “enfermaria”.
+
+```
+SELECT paciente.nome_completo, medico.nome_completo, internacao.data_entrada, internacao.procedimento, quarto.tipo_fk 
+FROM internacao
+INNER JOIN medico 
+ON medico.id_medico = internacao.medico_fk
+INNER JOIN paciente 
+ON paciente.id_paciente = internacao.paciente_fk 
+INNER JOIN quarto 
+ON quarto.id_quarto = internacao.quarto_fk 
+WHERE quarto.tipo_fk = 3 AND medico.especialidade_fk = 3;
+```
+
+>Os nomes dos médicos e a quantidade de consultas que cada um realizou.
+
+```
+SELECT medico.nome_completo, COUNT(consulta.medico_fk) AS 'Quantidade de consultas' 
+FROM medico
+INNER JOIN consulta 
+ON medico.id_medico = consulta.medico_fk
+GTOUP BY consulta.medico_fk;
+
+```
+
+>Todos os médicos que tenham "Gabriel" no nome.
+
+```
+SELECT * 
+FROM medico 
+WHERE nome_completo LIKE "%Gabriel%";
+```
+
+>Os nomes, CREs e número de internações de enfermeiros que participaram de mais de uma internação.
+
+```
+SELECT enfermeiro.nome_completo, enfermeiro.cre, COUNT(internacao.enfermeiro_fk) AS Participacao 
+FROM enfermeiro 
+INNER JOIN internacao 
+ON enfermeiro.id_enfermeiro = internacao.enfermeiro_fk 
+GROUP BY enfermeiro.id_enfermeiro 
+HAVING Participacao > 1;
+
+```
