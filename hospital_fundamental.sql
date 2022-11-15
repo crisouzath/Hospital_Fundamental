@@ -470,3 +470,47 @@ when 9 then 'Ativo'
 when 10 then 'Ativo'
 end
 where id_medico in (1,2,3,4,5,6,7,8,9,10)
+
+-- PARTE 5
+-- Todos os dados e o valor médio das consultas do ano de 2020 e das que foram feitas sob convênio.
+select * from consulta having year(data) = '2020';
+
+-- Todos os dados das internações que tiveram data de alta maior que a data prevista para a alta.
+select * from internacao where data_alta > data_prev_saida;
+
+-- Receituário completo da primeira consulta registrada com receituário associado.
+select receita.medicamentos, receita.quantidade, receita.instrucoes, paciente.nome_completo as paciente_nome, medico.nome_completo as medico_paciente  from receita inner join paciente on receita.paciente_fk=paciente.id_paciente inner join medico on receita.medico_fk=medico.id_medico order by receita.id_receita limit 1;
+
+-- Todos os dados da consulta de maior valor e também da de menor valor (ambas as consultas não foram realizadas sob convênio).
+select *, Max(valor_consulta), Min(valor_consulta) from consulta group by convenio_fk is null;
+
+-- Todos os dados das internações em seus respectivos quartos, calculando o total da internação a partir do valor de diária do quarto e o número de dias entre a entrada e a alta.
+ select internacao.id_internacao, quarto.id_quarto, datediff(data_alta, data_entrada) AS dias_em_uso, tipo_quarto.valor_diaria, datediff(data_alta, data_entrada) * tipo_quarto.valor_diaria valor_total from internacao inner join quarto on internacao.quarto_fk = quarto.id_quarto inner join tipo_quarto on quarto.tipo_fk = tipo_quarto.id_tipo group by id_internacao;
+ 
+ -- Data, procedimento e número de quarto de internações em quartos do tipo “apartamento”.
+ Select internacao.data_entrada, internacao.procedimento, quarto.numero from internacao inner join quarto on quarto.id_quarto = internacao.quarto_fk where quarto.tipo_fk = 2;
+ 
+ -- Nome do paciente, data da consulta e especialidade de todas as consultas em que os pacientes eram menores de 18 anos na data da consulta e cuja especialidade não seja “pediatria”, ordenando por data de realização da consulta.
+  select paciente.nome_completo, consulta.data, especialidade.nome_especialidade from consulta inner join paciente on paciente.id_paciente = consulta.paciente_fk inner join especialidade on especialidade.id_especialidade = consulta.especialidade where consulta.especialidade <> 1 and YEAR(consulta.data) - YEAR(paciente.data_nascimento) < 19 and YEAR(consulta.data) - YEAR(paciente.data_nascimento) > 0 order by consulta.data;
+  
+  -- Nome do paciente, nome do médico, data da internação e procedimentos das internações realizadas por médicos da especialidade “gastroenterologia”, que tenham acontecido em “enfermaria”.
+  select paciente.nome_completo, medico.nome_completo, internacao.data_entrada, internacao.procedimento, quarto.tipo_fk from internacao inner join medico on medico.id_medico = internacao.medico_fk inner join paciente on paciente.id_paciente = internacao.paciente_fk inner join quarto on quarto.id_quarto = internacao.quarto_fk where quarto.tipo_fk = 3 and medico.especialidade_fk = 3;
+  
+-- Os nomes dos médicos e a quantidade de consultas que cada um realizou.
+SELECT medico.nome_completo, COUNT(consulta.medico_fk) AS 'Quantidade de consultas' 
+FROM medico
+INNER JOIN consulta 
+ON medico.id_medico = consulta.medico_fk
+GROUP BY consulta.medico_fk;
+
+-- Todos os médicos que tenham "Gabriel" no nome.
+select * from medico where nome_completo like "%Gabriel%";  
+
+-- Os nomes, CREs e número de internações de enfermeiros que participaram de mais de uma internação.
+SELECT enfermeiro.nome_completo, enfermeiro.cre, COUNT(internacao.enfermeiro_fk) AS Participacao 
+FROM enfermeiro 
+INNER JOIN internacao 
+ON enfermeiro.id_enfermeiro = internacao.enfermeiro_fk 
+GROUP BY enfermeiro.id_enfermeiro 
+HAVING Participacao > 1; 
+  
