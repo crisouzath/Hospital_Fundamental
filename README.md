@@ -393,7 +393,7 @@ SELECT medico.nome_completo, COUNT(consulta.medico_fk) AS 'Quantidade de consult
 FROM medico
 INNER JOIN consulta 
 ON medico.id_medico = consulta.medico_fk
-GTOUP BY consulta.medico_fk;
+GROUP BY consulta.medico_fk;
 
 ```
 
